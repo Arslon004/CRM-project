@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { v4 } from 'uuid'
 import { Col, Container, Row } from 'react-bootstrap'
 import ProductHeader from '../components/header/ProductHeader'
 import ProductForm from '../components/form/ProductForm'
 import ProductTable from '../components/table/ProductTable'
+import { toast } from 'react-toastify'
 
 const ProductsPage = () => {
 
@@ -22,7 +23,7 @@ const ProductsPage = () => {
   const [sort, setSort] = useState('sort');
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit =(e) => {
     e.preventDefault();
     const form = e.target;
     if (form.checkValidity()) {
@@ -30,6 +31,7 @@ const ProductsPage = () => {
       let newProducts;
       if (selected === null) {
         newProducts = [...products, newProduct];
+        toast.success("Added successfully");
       } else {
         newProducts = products.map((product) => {
           if (product.id === selected) {
@@ -39,6 +41,7 @@ const ProductsPage = () => {
             return product
           }
         })
+        toast.success("Edit successfully")
       }
       setProducts(newProducts);
       localStorage.setItem('products', JSON.stringify(newProducts));
@@ -80,34 +83,26 @@ const ProductsPage = () => {
   const handleSort = (e) => {
     setSort(e.target.value);
   }
+
+  const ProductHeaderProps = { handleSort, sort, handleCategory, category, handleSearch, search }
+
+  const ProductFormProps = { selected, product, handleProduct, validated, handleSubmit }
+
+  const ProductTableProps = { sort, category, search, deleteProduct, editProduct, products }
   return (
     <Container>
       <ProductHeader
-        handleSort={handleSort}
-        sort={sort}
-        handleCategory={handleCategory}
-        category={category}
-        handleSearch={handleSearch}
-        search={search}
+        {...ProductHeaderProps}
       />
       <Row>
         <Col md="4">
           <ProductForm
-            selected={selected}
-            product={product}
-            handleProduct={handleProduct}
-            validated={validated}
-            handleSubmit={handleSubmit}
+            {...ProductFormProps}
           />
         </Col>
         <Col md="8">
           <ProductTable
-            sort={sort}
-            category={category}
-            search={search}
-            deleteProduct={deleteProduct}
-            editProduct={editProduct}
-            products={products}
+            {...ProductTableProps}
           />
         </Col>
       </Row>

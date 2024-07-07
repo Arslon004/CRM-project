@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 
 import PropTypes  from "prop-types";
 
@@ -26,5 +26,5 @@ ProductTableCard.propTypes={
   editProduct:PropTypes.func,
   deleteProduct:PropTypes.func,
 }
-
-export default ProductTableCard
+const MemoProductTableCard=memo(ProductTableCard)
+export default MemoProductTableCard;

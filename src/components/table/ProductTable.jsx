@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Table } from 'react-bootstrap'
 
 import PropTypes from "prop-types";
@@ -54,4 +54,5 @@ ProductTable.propTypes={
   search:PropTypes.string,
   category:PropTypes.string,
 }
-export default ProductTable
+const MemoProductTable=memo(ProductTable)
+export default MemoProductTable;

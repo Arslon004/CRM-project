@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { memo } from 'react'
 import { Button, Form } from 'react-bootstrap';
 import products from '../../data/products';
 
@@ -74,4 +74,5 @@ ProductForm.propTypes={
   handleProduct:PropTypes.func,
   selected:PropTypes.oneOfType([PropTypes.string,PropTypes.object]),
 }
-export default ProductForm
+const MemoProductForm=memo(ProductForm)
+export default MemoProductForm;

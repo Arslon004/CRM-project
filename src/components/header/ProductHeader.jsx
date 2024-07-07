@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Col, Form, InputGroup, Row } from 'react-bootstrap'
 import products from '../../data/products'
 
@@ -49,4 +49,5 @@ ProductHeader.propTypes = {
   handleCategory: PropTypes.func,
   handleSort: PropTypes.func,
 }
-export default ProductHeader
+const MemoProductHeader=memo(ProductHeader);
+export default MemoProductHeader;
