@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 const ProductForm = ({validated,handleSubmit,product:{name,price,category,quantity,desc,},handleProduct,selected,}) => {
 
   return (
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
+    <Form noValidate  validated={validated} onSubmit={handleSubmit}>
 
       <Form.Group className="mb-3" controlId="name">
         <Form.Label>Name</Form.Label>

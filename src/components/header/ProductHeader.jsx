@@ -9,7 +9,7 @@ const ProductHeader = ({ search, handleSearch, category, handleCategory ,sort,ha
     <header className='py-4'>
       <Row >
         <Col md="4">
-          <h2>Products</h2>
+          <h2 className='text-success-emphasis' style={{fontSize:"35px",fontWeight:"bold"}}>Products</h2>
         </Col>
         <Col md="8">
           <InputGroup className="mb-3">
