@@ -69,6 +69,7 @@ const ProductsPage = () => {
     if (isDelete) {
       setProducts(newProducts);
       localStorage.setItem('products', JSON.stringify(newProducts));
+      toast.success("Deleted successfully");
     }
   }
 

@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom"
-import ProductsPage from "./pages/ProductsPage"
+import ProductsPageWithHook from "./pages/ProductsPageWithHook"
+
 
 function App() {
 
@@ -7,7 +8,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/">
-        <Route index element={<ProductsPage/>}/>
+        <Route index element={<ProductsPageWithHook/>}/>
       </Route>
     </Routes>
     </BrowserRouter>
