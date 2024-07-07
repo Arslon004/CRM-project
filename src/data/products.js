@@ -4,5 +4,6 @@ const products = [
   "Meat",
   "Seafood",
   "Food",
+  "Fruit"
 ];
 export default products;

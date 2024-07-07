@@ -5,7 +5,20 @@ import PropTypes from "prop-types";
 
 import ProductTableCard from '../card/ProductTableCard';
 
-const ProductTable = ({products,editProduct,deleteProduct,}) => {
+const ProductTable = ({products,editProduct,deleteProduct,search,category,sort}) => {
+
+  let results=products.filter((product)=>product.name.toLowerCase().includes(search));
+
+  if(category !== "all"){
+    results=results.filter((product)=>product.category === category);
+  }
+
+  if(sort==="increase"){
+    results = results.sort((a,b)=>b.price-a.price);
+  }else if(sort === 'decrease'){
+    results = results.sort((a,b)=>a.price-b.price);
+  }
+
   return (
     <Table striped bordered hover >
     <thead>
@@ -18,9 +31,10 @@ const ProductTable = ({products,editProduct,deleteProduct,}) => {
         <th className='text-center'>Actions</th>
       </tr>
     </thead>
+
     <tbody>
-      {products.length !== 0 ?
-      products.map((product,i)=>(
+      {results.length !== 0 ?
+      results.map((product,i)=>(
        <ProductTableCard editProduct={editProduct} deleteProduct={deleteProduct} key={product.id} order={i+1} {...product}/>
       ))
       :
@@ -37,5 +51,7 @@ ProductTable.propTypes={
   products:PropTypes.array,
   editProduct:PropTypes.func,
   deleteProduct:PropTypes.func,
+  search:PropTypes.string,
+  category:PropTypes.string,
 }
 export default ProductTable
