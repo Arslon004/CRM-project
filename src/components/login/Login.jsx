@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Login = () => {
@@ -44,6 +44,9 @@ const Login = () => {
     }
   }
 
+  const forgotPassword=()=>{
+    setRegistered(false);
+  }
   return (
     <div className={styles.loginPage}>
       <div className={styles.login__container}>
@@ -83,6 +86,9 @@ const Login = () => {
             >
               Register
             </button>
+          </div>
+          <div className="remember-forgot">
+            <Link onClick={forgotPassword}  href="#">Forgot password?</Link>
           </div>
         </form>
       </div>
