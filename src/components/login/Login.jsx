@@ -6,38 +6,44 @@ import { toast } from 'react-toastify';
 const Login = () => {
   const navigate = useNavigate();
 
-  const [username,setUsername]=useState("");
-  const [password,setPassword]=useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [registered,setRegistered]=useState(true);
 
-  const handleUser=(e)=>{
+  const handleUser = (e) => {
     setUsername(e.target.value);
   }
 
-  const handlePassword=(e)=>{
+  const handlePassword = (e) => {
     setPassword(e.target.value);
   }
 
-  const userName=JSON.parse(localStorage.getItem('username')) || null;
-  const userPassword=JSON.parse(localStorage.getItem('password')) || null;
+  const userName = JSON.parse(localStorage.getItem('username')) || null;
+  const userPassword = JSON.parse(localStorage.getItem('password')) || null;
 
-  const handleSubmit=(e)=>{
+  const handleSubmit = (e) => {
     e.preventDefault();
-    if(username===userName && password === userPassword){
+    if (username === userName && password === userPassword) {
       toast.success("Login success");
       navigate("/products");
-    }
-    else{
+    } else {
       toast.error("Invalid username or password");
     }
   }
 
-
-  const handleRegister=(e)=>{
+  const handleRegister = (e) => {
     e.preventDefault();
-    localStorage.setItem('username',JSON.stringify(username));
-    localStorage.setItem('password',JSON.stringify(password));
-    toast.success("User registered successfully");
+    if(registered){
+      toast.error("Already registered");
+    }else{
+      localStorage.setItem('username', JSON.stringify(username));
+      localStorage.setItem('password', JSON.stringify(password));
+      toast.success("User registered successfully");
+      setRegistered(true);
+      navigate("/products");
+    }
   }
+
   return (
     <div className={styles.loginPage}>
       <div className={styles.login__container}>
@@ -72,7 +78,7 @@ const Login = () => {
             </button>
             <button
               className="btn btn-secondary"
-              type="button"
+              type="submit"
               onClick={handleRegister}
             >
               Register
