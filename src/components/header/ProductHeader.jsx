@@ -22,7 +22,7 @@ const ProductHeader = ({ search, handleSearch, category, handleCategory ,sort,ha
 
             <InputGroup.Text >
               <Form.Select value={sort} onChange={handleSort}>
-                <option value="sort">Sory by</option>
+                <option value="sort">Sory by price</option>
                 <option value="decrease">Decrease</option>
                 <option value="increase">Increase</option>
               </Form.Select>
