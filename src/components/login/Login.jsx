@@ -5,43 +5,48 @@ import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
-  const [detail, setDetail] = useState({ username: '', password: '' });
 
-  const login = (e) => {
+  const [username,setUsername]=useState("");
+  const [password,setPassword]=useState("");
+
+  const handleUser=(e)=>{
+    setUsername(e.target.value);
+  }
+
+  const handlePassword=(e)=>{
+    setPassword(e.target.value);
+  }
+
+  const userName=JSON.parse(localStorage.getItem('username')) || null;
+  const userPassword=JSON.parse(localStorage.getItem('password')) || null;
+
+  const handleSubmit=(e)=>{
     e.preventDefault();
-    const storedUser = JSON.parse(localStorage.getItem('username'));
-    const storedPassword = JSON.parse(localStorage.getItem('password'));
-
-    if (detail.username === storedUser && detail.password === storedPassword) {
-      navigate('/products');
-    } else {
-      toast.error('Invalid username or password');
+    if(username===userName && password === userPassword){
+      toast.success("Login success");
+      navigate("/products");
     }
-  };
+    else{
+      toast.error("Invalid username or password");
+    }
+  }
 
-  const handleUser = (e) => {
-    setDetail({ ...detail, username: e.target.value });
-  };
 
-  const handlePassword = (e) => {
-    setDetail({ ...detail, password: e.target.value });
-  };
-
-  const handleRegister = () => {
-    localStorage.setItem('username', JSON.stringify(detail.username));
-    localStorage.setItem('password', JSON.stringify(detail.password));
-    toast.success('User registered successfully');
-  };
-
+  const handleRegister=(e)=>{
+    e.preventDefault();
+    localStorage.setItem('username',JSON.stringify(username));
+    localStorage.setItem('password',JSON.stringify(password));
+    toast.success("User registered successfully");
+  }
   return (
     <div className={styles.loginPage}>
       <div className={styles.login__container}>
-        <form onSubmit={login} className={styles.form}>
+        <form className={styles.form}>
           <div>
             <div>Username</div>
             <input
               className={styles.input}
-              value={detail.username}
+              value={username}
               onChange={handleUser}
               type="text"
               placeholder="username"
@@ -53,7 +58,7 @@ const Login = () => {
             <div>Password</div>
             <input
               className={styles.input}
-              value={detail.password}
+              value={password}
               onChange={handlePassword}
               type="password"
               placeholder="password"
@@ -62,7 +67,7 @@ const Login = () => {
           </div>
 
           <div>
-            <button className="btn btn-primary me-4" type="submit">
+            <button onClick={handleSubmit} className="btn btn-primary me-4" type="submit">
               Login
             </button>
             <button
