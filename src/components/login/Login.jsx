@@ -15,8 +15,16 @@ const Login = () => {
     if (detail.username === storedUser && detail.password === storedPassword) {
       navigate('/products');
     } else {
-      toast.success('Invalid username or password');
+      toast.error('Invalid username or password');
     }
+  };
+
+  const handleUser = (e) => {
+    setDetail({ ...detail, username: e.target.value });
+  };
+
+  const handlePassword = (e) => {
+    setDetail({ ...detail, password: e.target.value });
   };
 
   const handleRegister = () => {
@@ -34,7 +42,7 @@ const Login = () => {
             <input
               className={styles.input}
               value={detail.username}
-              onChange={(e) => setDetail({ ...detail, username: e.target.value })}
+              onChange={handleUser}
               type="text"
               placeholder="username"
               required
@@ -46,7 +54,7 @@ const Login = () => {
             <input
               className={styles.input}
               value={detail.password}
-              onChange={(e) => setDetail({ ...detail, password: e.target.value })}
+              onChange={handlePassword}
               type="password"
               placeholder="password"
               required
@@ -54,10 +62,11 @@ const Login = () => {
           </div>
 
           <div>
-            <button className="btn btn-primary me-4" type="submit">Login</button>
-
+            <button className="btn btn-primary me-4" type="submit">
+              Login
+            </button>
             <button
-              className="btn btn-secondary "
+              className="btn btn-secondary"
               type="button"
               onClick={handleRegister}
             >
